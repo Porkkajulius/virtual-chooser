@@ -1,14 +1,12 @@
 import express from "express";
+import { PORT } from "./config/constants";
+import { travelRouter } from "./routes";
+
 const app = express();
-const port = 8080; // default port to listen
+app.use(express.json());
 
-// define a route handler for the default home page
-app.get("/", (req, res) => {
-  res.send("Hello world!");
-});
+app.use("/api/v1/travels", travelRouter);
 
-// start the Express server
-app.listen(port, () => {
-// tslint:disable-next-line:no-console
- console.log(`server started at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
 });
